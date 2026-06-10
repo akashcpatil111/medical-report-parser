@@ -51,49 +51,46 @@ Medical Report Image
 
 ---
 
-## 🚀 Getting Started
+# Medical Report Parser (Vision-to-JSON)
 
-### Prerequisites
+Digitize paper-based reports into machine-readable JSON using Tesseract OCR and Google Gemini.
 
-- Python 3.10+
-- Tesseract OCR installed on your system ([install guide](https://github.com/tesseract-ocr/tesseract))
-- A Google Gemini API key ([get one here](https://aistudio.google.com/))
+## Phase 1: Environment Setup
 
-### Installation
+1.  **Install Tesseract OCR**:
+    *   **Windows**: Download the installer from [UB Mannheim Tesseract](https://github.com/UB-Mannheim/tesseract/wiki).
+    *   During installation, note the installation path (usually `C:\Program Files\Tesseract-OCR`).
+    *   **CRITICAL**: Add this path to your System Environment Variable `PATH` so the specific command `tesseract` works in your terminal.
+    *   **Mac**: Run `brew install tesseract`.
+
+2.  **API Key**:
+    *   Get a Google Gemini API Key from [Google AI Studio](https://aistudio.google.com/).
+    *   Set it as an environment variable `GEMINI_API_KEY` or paste it directly in `app.py` (line 15) for testing.
+
+## Phase 2: Installation
+
+Open your terminal in this folder and run:
 
 ```bash
-git clone https://github.com/akashcpatil111/medical-report-parser.git
-cd medical-report-parser
-
 pip install -r requirements.txt
 ```
 
-### Configuration
+## Phase 3: Running & Testing
 
-Create a `.env` file in the project root:
-
-```
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-### Running the Parser
+Run the application:
 
 ```bash
-cd Medical_Parser_Project
-python main.py --input path/to/report_image.jpg
-```
-
-### Running the Dashboard
-
-```bash
-cd backend
 python app.py
-# Open http://localhost:5000 in your browser
 ```
 
----
+### What happens?
+1.  **Image Generation**: A file `medical_report_test.png` is created automatically.
+2.  **OCR**: Tesseract reads the text from the image.
+3.  **Parsing**: Gemini converts the raw text into structured JSON.
 
-## 📤 Sample Output
+### 📤 Sample Output
+You should see a structured JSON object in your terminal:
+
 
 ```json
 {
@@ -123,6 +120,16 @@ python app.py
   ]
 }
 ```
+
+
+
+## Phase 4: Customization
+
+To test with your own report:
+1.  Place your image in this folder.
+2.  Rename it to `my_report.png` (or update line 23 in `app.py`).
+3.  Run `python app.py` again.
+
 
 
 ## 🔮 Roadmap
